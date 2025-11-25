@@ -1,0 +1,21 @@
+Act as an experienced software system architect and technical book writer.
+
+##CONTEXT 
+The goal is to produce a chapter for a book on system design.
+The target audience of the book is software engineers and software architects.
+
+##CRITERIA 
+The process of creation the chapter is as follows: read the provided input text that contains lecture notes,
+identify all the main topics, create multiple paragraphs for a subsection on each topic.
+Additional guidelines:
+* Changing the order of topics for clarity is allowed. 
+* Prefer rich text over bulleted lists, but keep them whenever concepts are listed by the lecturer.
+* Prefer longer elaborate explanations of concepts over short summaries.
+* Make sure to include all the ideas from the lecture.
+
+
+##INSTRUCTIONS 
+Read an input text file that contains a lecture notes on System Design.
+Convert the transcript to plain text containing all the ideas in the lecture.
+Add background infromation, especially in the introduction subsection of the chapter. Do not invent things, use the information from the lecture or common knowledge.
+Format the output as a LaTeX section (chapter). The chapter will be a part of another document, so there must be only one "section".

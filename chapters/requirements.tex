@@ -1,0 +1,150 @@
+\section{Principles of Software Design}
+
+In this chapter, we introduce the fundamental principles of software design, focusing on the methodology and processes that guide the creation of effective software systems. This book is not about programming techniques or the use of specific programming languages. Instead, it emphasizes the conceptual frameworks and decision-making approaches necessary for designing robust, maintainable, and scalable software systems.
+
+\subsection{The Language of System Design}
+It is essential to distinguish between \textit{design} and \textit{programming}. While programming focuses on the implementation of specific algorithms or logic using a programming language, software design deals with how to organize and structure the system as a whole. Great systems are built by great architects, and to become a great software architect, one must develop the ability to step back from the immediate coding task and consider the larger picture.
+
+To talk about system design, we need a robust language to eliminate ambiguity.
+
+A \textbf{System} is a composition of interacting elements based on some set of rules, exhibiting some behavior defined by its purpose. A system has boundaries and is defined by its structure. E.g. a database-management system has a set of components (elements), interrelated data and a set of programs, e.g., SQL parser, storage manager, and a query optimizer. It has a boundary defined by its interface: an input language and a set of configuration knobs. Its purpose is to provide a convenient and efficient way of storing and retrieving database information. Here we are concerned with human-made (designed) systems, so we assume a system has a well-defined purpose or goal.
+
+A \textbf{Subsystem} is a system that serves as a part of a larger system. An example of such would be memory subsystem in an SoC (System-on-Chip). As a system in its own right, it may have components like the scheduler, controller, and RAM. It has its own purpose --- storing and providing access to data and instructions. And as a part of a larger system, it plays the role of an element, contributing to the overall goal of the SoC, performing some computation task.
+
+\subsection{System Decomposition}
+One of the primary challenges in software design is managing complexity. As systems grow in size and functionality, the need to decompose the system into smaller, manageable components becomes more critical. As Dijkstra noted in 1975, effective programming boils down to "very effective thinking" to manage complexity and separate concerns in a meaningful way.
+
+The goal of system decomposition is to break down the system into functional components that can be more easily designed, understood, and maintained. This often involves identifying the various system components and their relationships and focusing on how these components interact.
+
+\subsection{Complexity and Its Causes}
+In order to talk about complexity, it would be reasonable to give it a definition in the context of system design, so that one can reason about it. How do we understand whether a system is complex or not? We usually call a system complex if it is hard to make judgments about. While the complexity often correlates with the size of the system, it is not the size that makes a system complex. A large system can be easy enough to reason about if we can build a compact mental model of its parts and their relations to each other.
+Consider the following example of a spin glass system --- a lattice with some particles with a spin at its nodes~\ref{fig:spinglass}. Notice how the complexity of the system description (a high-level parameter, such as, e.g., overall magnetic field) depends on the entropy in the system. In both cases, when the entropy has its extrema, the model of a system is simple (leftmost \& in the middle). The complexity creeps in somewhere in the middle, when there are non-trivial patterns exist that prevent one from giving a straightforward description, break the linearity of the system, introduce corner cases, etc.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{figures/spinglass.jpg}
+    \caption{System complexity: motivational example}
+    \label{fig:spinglass}
+\end{figure}
+
+This idea of complexity description is tightly coupled with the amount of information. The more patterns there are in the system, the more information is needed to describe it. In the context of system design description, we can reason about this in the following way. Every system, mechanical, biological, or conceptual, is built out of some "components". Let us call these components \textbf{parameters~$\lambda_j$}. A system can then be described in terms of its parameters and relations between those. We parameters as nodes and relations as edges we can represent such a description in the form of a graph. The structure of such a graph would give us clues about how complex the system is, using the same entropy-based approach. Again, simple systems emerge at both ends of the spectrum. With the small number of relations, we have a simple graph of isolated components that are easy to reason about (think of a well-decomposed system with clearly defined, concise interfaces). Likewise, in a complete graph with the same relations between nodes and the same kinds of parameters, we get a parallel processing structure that is also easy to reason about (think of a set of equivalent services in a distributed system that have the same messaging interface and are interchangeable). When the system moves from these two extremes to the middle, more patterns are introduced, thus, more types of parameters exist with more relations and more patterns in those relations. The closer the graph, describing the system, to some middle point on this scale, the more patterns it can capture --- the more complex behavior a system can exhibit. If we are building a space ship navigation system, it has to include a model of all the relevant physical effects to reach the desired trajectory prediction accuracy. If we are building an operating system, it has to be able to map its internal representations to a wide variety of existing hardware.
+
+This thought experiment leads to an important result in a natural way: complexity in software systems is inevitable. The more useful behaviors we want a system to produce, the more complex the graph becomes, meaning there is a certain degree of immanent (inherent) complexity to systems requiring certain behavior.
+Immanent complexity --- the required (inherent) complexity for the system to perform its function. As the system evolves, this part of the complexity is likely to increase over time: new functionality is added, the integration surface increases, and new users with different usage scenarios emerge. From the complexity theory point of view, this can be described in the following rough terms. Assume the system performs a function $F(x)$ where $x$ is some input to the system and $F$ is a set (composition) of functions $f_1, f_2, ..., f_n$ that work together to perform $F$. There is an optimal number of parameters $\lambda_j$ that describe $F$. As we increase the number of functions ($n$), the number of parameters ($\lambda$) grows, so any possible implementation of the system requires more parts or interconnections.
+
+The non-inherent complexity comes from the ways the system is implemented. Any engineering system built is a tradeoff made within a multidimensional parameter space (we increase the wheel diameter of a race car --- the grip is now better, but acceleration suffers). The more restrictions each axis (parameter) has, the fewer options the system designer has. The fewer the options, the easier it is to simulate, compute, and reason about the tradeoffs. Software systems are mostly free from the vast number of restrictions and limitations that other engineering fields impose on a given project. There is no gravity, no fire safety requirements, no emission standards, etc. The lack of strict limits dramatically increases the search space for possible designs. It makes designing systems a mysterious, unstructured process. Once similar systems have been built multiple times, experience emerges. In a sense, an experienced architect uses the knowledge acquired in the past to impose additional limitations on the search space to limit the number of possible designs, thus trimming the unpromising designs.
+
+Both inherent and non-inherent complexity can and should be managed. The immanent complexity is reduced by carefully choosing the set of functions $f_i$ and how they are mapped to the internal parameters $\lambda_j$. The non-inherent complexity is managed through the system design processes, i.e., appropriate decomposition and composition, and all the well-known software engineering techniques. One prominent example of such a technique is the use of design patterns~\cite{design-patterns}, which we would like to take a closer look at due to its prevalence. While the patterns provide a powerful tool to communicate the intention and lay out ready-to-use recipes for certain common problems, designing a system using them as a primary tool leads to suboptimal decomposition, which we discuss extensively in chapter~\ref{decomposition}.
+We dive into the topics of mapping and decomposing in chapter~\ref{design}.
+
+Some of the primary causes of complexity include:
+\begin{itemize}
+    \item \textbf{Dependencies:} A piece of code cannot be understood or modified in isolation. Dependencies between components can lead to tight coupling, making it harder to maintain and extend the system.
+    \item \textbf{Obscurity:} Important information, such as unclear variable names or inadequate documentation, may be hidden or not easily understood.
+    \item \textbf{Incremental Complexity:} Small dependencies and obscurities can accumulate over time, increasing the overall complexity of the system.
+\end{itemize}
+
+Understanding and managing these sources of complexity is crucial to effective system design.
+
+\subsection{Design and Architecture}
+Design is both a process and a result. Throughout the book, we will use the terms \textit{design} and \textit{architecture} interchangeably. Design decisions are driven by requirements—functional, non-functional, and quality attributes—that must be satisfied by the system. 
+
+\textit{Architecture}, in the context of software systems, refers to the high-level structure that dictates how components are organized and how they interact. It is closely related to the system’s design but focuses on organizing the system to meet both functional and non-functional requirements. It can influence critical system qualities like performance, scalability, security, and maintainability.
+
+\subsection{Architecture and Design Drivers}
+Software architecture and design decisions are influenced by various "drivers", which are the constraints or goals that guide the design process. These drivers can include technical constraints, budgetary limitations, performance requirements, or user needs. 
+
+The key goal of architecture is to tame complexity by selecting the right components and defining clear relationships between them. However, there is no single "right" architecture for all systems. The architecture must be tailored to meet the specific requirements and constraints of the project.
+
+\subsection{Software Architecture and Design}
+Architecture acts as the skeleton of a system. It provides a structural framework within which all the components of the system interact. However, architecture is orthogonal to functionality. For example, the same functional system could be implemented in different architectural styles, such as a 2-tier, 3-tier, or peer-to-peer (P2P) architecture.
+
+The architecture should provide a solution to the system’s requirements while accommodating the necessary trade-offs. A well-designed system architecture not only addresses the functional requirements but also focuses on important non-functional attributes like scalability, performance, and security.
+
+\subsection{Requirements Definition}
+Every system is built in order to solve a real-life problem. The trick is to describe the problem in such a way that it can be understood by other human beings who would translate that understanding into a programming language.
+
+While requirements are the starting point in the process of designing a system, they play multiple roles throughout the process of the system life cycle. High-level requirements provide a basis for agreement between the system designer and other stakeholders on what is to be built. They allow us to reason about and assess system's qualities (whether or not the system behaves the way it should). They guide the scheduling of the development work and provide the basis for any sort of (formal) verification.
+
+For an architect, requirements are the primary tool to drive the system design. They serve as a compass when navigating the open design-space waters, so setting the process of \emph{requirements engineering} right is crucial. No matter your speed, sailing south instead of west will not get you closer to the destination. The \textbf{where to} is far more important than the \textbf{how}. Curiously, people suck at describing things precisely (e.g., exact instructions challenge). Natural language and our cognition just isn't wired for the job. Computational systems, however, deal only with formally specified instructions. So, the vague natural language needs translation. Large complex systems (today, any meaningful system is large and complex) are built by multiple people. So, the "where to" needs to be conveyed to one another. \textbf{Understanding} becomes the cornerstone of the development process, and any error at this stage gets amplified downstream if not handled immediately.
+
+The translation is enough of an issue on its own, but reality adds more complexity to the process. Requirements tend to change. New requirements emerge, some are not obvious, some are contradictory, incomplete, or plain wrong. The flexibility of software systems allows for accommodating that to a relatively great extent. Such changes demand a process for requirements engineering~\ref{fig:requirements} and a set of qualities for the requirements specification.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{figures/requirements.jpg}
+    \caption{Requirements engineering process}
+    \label{fig:requirements}
+\end{figure}
+
+The quest for software requirements
+(todo: requirements vs specification)
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|p{5cm}|p{4cm}|p{4cm}|}
+\hline
+\textbf{Title} & \textbf{Authors} & \textbf{Publisher / Year} \\
+\hline
+\textit{Software Requirements} & Karl Wiegers, Joy Beatty & Microsoft Press, 3rd ed. 2013 \\
+\hline
+\textit{Mastering the Requirements Process} & Suzanne \& James Robertson & Addison-Wesley, 2012 (Volere) \\
+\hline
+\textit{A Guide to the Business Analysis Body of Knowledge (BABOK)} & IIBA & IIBA, 3rd ed. 2015 \\
+\hline
+\textit{Requirements Engineering: From System Goals to UML Models to Software Specifications} & Axel van Lamsweerde & Wiley, 2009 \\
+\hline
+\textit{Requirements Engineering} & Ian Sommerville, Pete Sawyer & Wiley, 2nd ed. 1997 \\
+\hline
+\textit{Managing Software Requirements: A Use Case Approach} & Dean Leffingwell, Don Widrig & Addison-Wesley, 3rd ed. 2003 \\
+\hline
+\textit{Systems Analysis and Design} & Alan Dennis, Barbara Wixom, Roberta Roth & Wiley, latest ed. \\
+\hline
+\textit{ISO/IEC/IEEE 29148:2018} & ISO/IEC/IEEE & International Standard \\
+\hline
+\end{tabular}
+\caption{Main books and references in software requirements engineering}
+\label{tab:req_books}
+\end{table}
+
+
+The foundation of any design process is a solid understanding of the requirements of the system. Requirements describe the necessary functions and features that the system must provide and drive decisions on the solution space. They serve as input to the design process and are critical in guiding the system toward its goals. Requirements set constraints and goals in the \textbf{design} (things we control and decide on) and \textbf{objective space} (things our system achieves that are important to the customer). Clearly formulated requirements help navigate the design and objective spaces. There are strict requirements that set boundaries, usually described in a form of a "shall"-statement (e.g., "The house shall have 3 bedrooms"). These restrict the design space. The second class of requirements deal with the goals, and are usually expressed through "should"-statements (e.g., "The house should cost less than X dollars").
+
+Requirements are typically divided into:
+\begin{itemize}
+    \item \textbf{Functional Requirements:} What the system should do, including features and capabilities.
+    \item \textbf{Quality Attributes:} Non-Functional requirements like performance, scalability, and reliability.
+    \item \textbf{Technical Requirements:} Constraints related to technology stack, deployment environments, data storage, and so on.
+    \item \textbf{Operational Requirements:} Requirements related to monitoring, recovery, and backup processes.
+    \item \textbf{Architectural Constrains:} ....
+\end{itemize}
+
+Clearly defining requirements ensures that the system will meet the user’s needs and provides a basis for validating and verifying the system later in the development process. They establish a contract between the stakeholders and the builder on what product to build. Requirements also provide a basis for the estimate of project costs.
+
+\subsection{Examples of Poor Requirements}
+Many software failures can be traced back to poor requirements management. A few notorious examples include:
+\begin{itemize}
+    \item \textbf{Mars Climate Orbiter (MCO):} A failure caused by units confusion between different systems (non-SI vs SI units) that led to the spacecraft’s destruction.
+    \item \textbf{FBI’s Virtual Case File (VCF):} A project with unclear and changing requirements, leading to a $170$ million loss without a usable system.
+    \item \textbf{Denver International Airport Baggage Handling System:} Poorly defined and unrealistic requirements that led to the system’s failure and delays in airport operations.
+\end{itemize}
+
+These examples illustrate the importance of clear, consistent, and well-defined requirements in successful system design.
+
+\subsection{Good Requirements Examples}
+On the other hand, well-defined and focused requirements can lead to successful systems. For example:
+\begin{itemize}
+    \item \textbf{DC-3 Aircraft Design:} A simple, focused request for an aircraft with clear and achievable requirements such as range, speed, and passenger capacity.
+    \item \textbf{Basecamp:} A project with a clear scope, incremental development, and a focus on simplicity. The requirements were user-driven, ensuring the product solved real problems without unnecessary complexity.
+\end{itemize}
+
+These examples highlight the importance of starting with clear, focused requirements that align with the overall goals of the system.
+
+... requirements elicitation ...
+
+SAFE
+
+
+\subsection{Conclusion}
+The key to designing effective software systems lies in understanding and managing complexity. By breaking down requirements into clear, actionable components and making informed design decisions based on these requirements, software architects can create systems that are both functional and scalable. Architecture provides the framework for the system, and effective design ensures that this framework meets both the technical and user needs. We will continue to explore how these principles can be applied to build systems that are not only technically sound but also meet the broader goals of the project.
+

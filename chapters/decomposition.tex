@@ -1,0 +1,229 @@
+\section{System Decomposition and Modularity}\label{decomposition}
+
+In this chapter, we delve deeper into the crucial phase of system decomposition. After discussing system requirements and conceptual design in previous chapters, we now focus on how to break down a system into smaller, more manageable components, each performing a specific role. This step, which involves the transformation of high-level design into subsystems and modules, is often the most controversial aspect of system design. We explore the importance of cohesion, well-defined interfaces, and the challenges involved in ensuring that subsystems integrate seamlessly to form a functional whole.
+
+The origins of system decomposition can be traced back to the 1960s and 1970s with the rise of structured programming. In this era, top-down design methodologies promoted the idea of breaking down systems hierarchically, starting from high-level system goals and decomposing them into smaller subsystems and modules.
+
+Key milestones in the evolution of decomposition strategies include:
+\begin{itemize}
+    \item \textbf{Modular Design:} Introduced the idea of independent modules with well-defined interfaces that could be combined to form larger systems.
+    \item \textbf{Dijkstra’s Influence:} Edsger W. Dijkstra’s work on structured programming and the "divide and conquer" strategy greatly contributed to the development of system decomposition techniques.
+    \item \textbf{Object-Oriented Programming (OOP):} OOP refined decomposition by introducing objects that encapsulate both data and behavior, offering reusable components.
+    \item \textbf{Data Flow Diagrams (DFDs):} These diagrams were used to visually represent data movement and functional components, aiding in the decomposition process.
+    \item \textbf{Modern Approaches:} Today, modern techniques like microservices architecture further refine decomposition by dividing systems into small, independently deployable services for greater scalability and flexibility.
+\end{itemize}
+
+\subsection{The Importance of Cohesion and Well-Defined Interfaces}
+At the heart of any successful system decomposition is the concept of \textit{cohesion}. Cohesion refers to the degree to which the components within a module or subsystem work together to achieve a single, well-defined purpose. A cohesive system ensures that the parts fit together well, minimizing unnecessary complexity and redundancy.
+
+For instance, when decomposing a system, one might imagine breaking down a car into various components, such as the wheels, engine, and seats. While each part has its own functionality, a lack of cohesion can lead to issues such as incompatibility or excessive complexity. For example, using skis instead of wheels would create a less cohesive system, as skis are not suited for the primary task of moving a vehicle.
+
+Along with cohesion, \textit{well-defined interfaces} are crucial for ensuring that different subsystems can interact with each other. A subsystem should be self-contained, with a clear set of inputs and outputs. This modularity allows for easy updates and adjustments without disrupting the overall system. Ensuring that each module has a clear, understandable interface is key to creating a maintainable and extensible system.
+
+\subsection{The Evolution of System Decomposition Techniques}
+System decomposition has evolved significantly over the decades. In the 1960s, when computers became more widely available in large computer centers, the dominant approach to system decomposition was \textit{top-down hierarchical design}. This approach focused on breaking down a problem into hierarchical levels, where smaller modules combined to create a fully functional system. This method was influenced by the top-down view of the world prevalent at the time.
+
+The top-down decomposition approach worked well initially, but as systems grew more complex, it became clear that there were limitations. In the 1970s, the concept of \textit{modular design} emerged, championed by Corden and Jordan's work on structured design. They advocated for decomposing systems into independent units with well-defined interfaces, inspired by principles from civil engineering. This idea paved the way for \textit{structured programming}, a key step in the evolution of system design, which emphasized the use of functional decomposition.
+
+As programming languages and computing power evolved, the 1980s saw the rise of the \textit{object-oriented programming} paradigm, which shifted the focus from modular decomposition to thinking in terms of interacting objects. This approach, influenced by languages like Smalltalk, enabled systems to be designed as collections of objects that interact through well-defined messages.
+
+In the 1990s, the rise of component-based architectures, such as CORBA, further emphasized modularity and distributed components. This laid the groundwork for the modern focus on microservices-based architectures, where systems are decomposed into small, independently deployable services.
+
+\subsection{Functional Decomposition and Its Limitations}
+One of the most natural ways to decompose a system is through \textit{functional decomposition}, where the system is broken down into functional components that perform specific tasks. For example, if a system is required to produce reports, a separate \textit{reporting component} would be created. If the system needs to sort data, a separate \textit{sorting component} would be developed.
+
+While functional decomposition is simple and intuitive, it has significant drawbacks. As the system grows and requirements change, the functional decomposition approach can lead to an explosion of components, each one fulfilling a specific need. For example, in a house, functional decomposition might dictate that we build separate components for cooking, eating, bathing, and sleeping. However, if the requirements change—such as needing to add a new appliance like a grill—multiple components would need to be adjusted or rebuilt.
+
+This leads to \textit{component explosion}, where each change to a requirement necessitates changes across multiple components, increasing the complexity and reducing the maintainability of the system. Functional decomposition also introduces redundancy, as the same functionality may be duplicated across different modules.
+
+The main limitations are:
+\begin{itemize}
+    \item \textbf{Coupling between Modules:} Changes in one module may necessitate changes in others, leading to tight coupling between modules.
+    \item \textbf{Explosion of Components:} Large systems often lead to an explosion of components, as the number of required functions increases.
+    \item \textbf{Flattening of System Hierarchy:} As functions become increasingly complex, it can be difficult to manage them, leading to bloated orchestrators that handle many functions simultaneously.
+\end{itemize}
+
+The biggest challenge of functional decomposition is that it sometimes results in poorly organized systems, with modules becoming overly interdependent and hard to modify.
+
+\subsection{The Problem with Over-Decomposition}
+The key issue with functional decomposition is that it often leads to over-decomposition, where the system is broken down into smaller and smaller parts, each with its own set of responsibilities. This excessive granularity creates a web of dependencies, making it harder to maintain and evolve the system. In a large-scale system, such as an enterprise application, this approach can result in thousands of components, each serving a specific function, but requiring constant adjustments to accommodate new requirements.
+
+Moreover, the overuse of functional decomposition can obscure the true goals of the system. When decomposing a house, for example, it might make sense to think about cooking as a separate component. But once we start adding multiple versions of cooking (e.g., microwave cooking, grilling, etc.), we risk losing sight of the underlying purpose, which is to provide a space for preparing food. This can lead to inefficiencies and unnecessary complexity.
+
+\subsection{Domain Decomposition as an Alternative}
+To overcome the limitations of functional decomposition, we turn to \textit{domain decomposition}, where the system is divided based on its business domains or areas of functionality. For instance, instead of creating separate components for cooking, sleeping, and eating, we might create domains for the kitchen, bedroom, and living room, each with its own set of requirements and functionalities.
+
+While domain decomposition provides a more holistic view of the system, it shares some of the same issues as functional decomposition, particularly when it comes to managing change. For example, if we build a kitchen and then later decide to add a living room, we may need to restructure the existing design to accommodate the new domain, leading to increased complexity.
+\begin{itemize}
+    \item \textbf{Reimplementation of Functionality:} The same functionality may be reimplemented in different domains, leading to unnecessary duplication.
+    \item \textbf{Difficulty in Extending Systems:} Adding new features to the system may require a complete restructuring of existing domains, especially if the system was not designed with flexibility in mind.
+\end{itemize}
+
+Despite these challenges, domain decomposition provides a better framework for organizing system components based on real-world contexts. It allows for a more natural mapping to the business requirements, ensuring that the system aligns with the needs of its users.
+
+\subsection{Object-Oriented Decomposition: A Modern Approach}
+Object-oriented decomposition is another widely used approach, where the system is modeled as a set of interacting objects, each encapsulating specific data and behaviors. This method focuses on creating classes that represent real-world entities and defines their interactions through methods (i.e., messages). Object-oriented decomposition emphasizes the principles of \textit{encapsulation}, \textit{inheritance}, and \textit{polymorphism}, allowing for more flexible and reusable components.
+
+Object-oriented decomposition typically follows these steps:
+\begin{itemize}
+    \item Identify system requirements (functional and non-functional).
+    \item Extract key objects and concepts relevant to the system’s domain.
+    \item Define class hierarchies using inheritance to establish relationships between objects.
+    \item Assign responsibilities to each class, ensuring they follow the Single Responsibility Principle (SRP).
+    \item Define interfaces for object interaction, ensuring encapsulation and data privacy.
+\end{itemize}
+
+However, object-oriented decomposition is not without its challenges. One of the main issues is that not all problems naturally lend themselves to object-oriented design. For instance, graph-based problems or procedural tasks like sorting may be difficult to model effectively using object-oriented principles. Additionally, excessive reliance on object-oriented decomposition can lead to complex inheritance hierarchies, making the system harder to maintain and scale.
+
+\begin{itemize}
+    \item \textbf{Complexity in Large Systems:} As systems grow, managing class hierarchies can become challenging, leading to tightly coupled and complex designs.
+    \item \textbf{Performance Overhead:} Object-oriented systems often introduce multiple layers of abstraction, which can slow performance and increase memory usage.
+    \item \textbf{Difficulty Mapping Real-World Problems:} Not all problems are naturally suited to object-oriented approaches. For some cases, functional or procedural designs may be more appropriate.
+\end{itemize}
+
+In large systems, poorly designed inheritance hierarchies can result in systems that are difficult to extend and maintain.
+
+\subsection{Volatility-Based Decomposition: A Better Approach}
+One effective strategy for system decomposition is \textit{volatility-based decomposition}, where we focus on identifying and isolating areas of the system that are subject to frequent change. By encapsulating volatile areas, we can minimize the impact of changes on the rest of the system. For example, in a system that tracks files, the file type may be a volatile area, as new formats can emerge over time. By encapsulating the file type logic in a separate component, we can ensure that changes to file formats do not affect other parts of the system.
+
+Volatility-based decomposition emphasizes identifying the components of the system that are likely to experience frequent changes, such as data formats or user interfaces, and encapsulating these volatile areas in separate modules. This approach reduces the overall complexity of the system by isolating change, making it easier to adapt to new requirements over time.
+
+Identifying areas of volatility requires careful analysis during the requirements phase, as volatility is not immediately apparent. Volatility can arise from changes in user needs, client expectations, operating environments, or content types, and must be carefully managed.
+
+\subsection{System Decomposition in Practice}
+In practice, decomposition strategies are not mutually exclusive. For instance, a complex system like Git combines different decomposition strategies to achieve scalability and maintainability:
+\begin{itemize}
+    \item Functional decomposition helps define Git’s core functionalities such as committing, branching, and merging.
+    \item Object-oriented decomposition organizes Git’s core elements (commits, trees, blobs) into objects with specific responsibilities.
+    \item Volatility-based decomposition handles the system’s different areas of volatility, such as user interactions, storage formats, and security concerns.
+\end{itemize}
+
+By combining these strategies, Git achieves a highly modular design that is flexible enough to handle changing requirements while maintaining performance and reliability.
+
+\subsection{Abstraction through Categorization}
+In this section, we will discuss some lessons that can be learned from abstract philosophy, cognitive theory, and languages, and how these notions and concepts can be applied to system decomposition. 
+
+\subsubsection{Wittgenstein's Language Games}
+
+Architects usually search for meanings or meaningful names in the systems to catch the decomposition beast by tail. Let's examine the notion of the meaning as it is so elegantly laid down by Wittgenstein. In Philosophical Investigations, he argued that meaning is not a fixed essence hidden behind words but arises from their use in social practices -- what he called “language games.”  
+Ludwig Wittgenstein’s early work Tractatus Logico-Philosophicus treated language as a mirror of the world: sentences represented facts like pictures. Later, however, he came to see this as too rigid. In Philosophical Investigations (1953), he radically redefined meaning, not as correspondence to essences but as use in practice. Under the threat to be beaten by professional philosophers here are the core ideas that can be useful for our purposes.
+
+First of all the notion of a language and language games - he argues that language is not one uniform system but a multitude of “games” with different rules. Asking for directions, writing a theorem, joking, or programming all use words differently. Meaning is tied to the rules of the game being played. Confusion arises when we import rules from one game into another.
+
+Then he introduces the notion of a meaning as use. Words don’t gain meaning by pointing to hidden essences (“ostensive definition”). Instead, they mean what they are used for in a community. “Understanding” a word is knowing how to use it competently in practice.
+
+Then he turns ot he rules of putting the words together -- grammar. Every language game has an implicit grammar: shared, rule-like practices that make communication possible. Grammar is rooted in forms of life—the human activities, needs, and instincts (e.g., care, survival, play) that ground meaning.
+
+Many concepts (e.g., “game”) have no single essence. They are held together by overlapping similarities—a network of resemblances, not one defining trait. This explains why rigid definitions often fail in ordinary language.
+
+Then he generalizes it to the highest congnitive level -- philosophy in general. Traditional philosophy looked for essences of concepts -- justice, mind, time. Wittgenstein saw this as a mistake: philosophical problems often come from “language going on holiday” --- using words outside their natural grammar. The philosopher’s task is not to define but to clarify: to map the uses of words and dissolve confusion.
+
+So why it matters to us? No single definition captures complex concepts. Context and practice matter. Rules are local. Each domain or community has its own grammar. Understanding is participatory. To “get” a concept is to play the game. Philosophy shifts to mapping practices rather than theorizing essences.
+
+To grasp the idea nothing is better than a good example. Here's how Stephen West is describing the language game in this good example in one of his podcast episodes on Wittgenstein \ref{philthis}:
+\begin{quote}
+So there's a tactic that's become pretty popular in what some people would call the debate space of the Internet these days. There's a trick someone will do where at the very beginning of the conversation, they'll ask the other person to define the exact thing that they're
+going to be talking about that day. Well, sound kind of like this. 
+
+- Just to start out today, can you please give me your definition of God? Can you give me a definition of abortion or insurrection or justice, whatever it is that day? 
+And then the other person will usually take the bait. They try to give their take on it. Maybe they'll say an insurrection is when a group of people try to overthrow some form of authority out there. Then the other person will say, back to that. 
+
+- Well, based on your definition, is a prison riot an insurrection? Then that's people overthrowing an authority. If a union fires a manager that's harassing employees, is that an insurrection? How about if my two kids both kick me in the shins at the exact same time? Is that an insurrection? I mean, if you can't even define what it is we're supposed to be talking about today, are you even qualified to be here? All the while, this person's usually winning points with the crowd that's watching the debate. I mean, if the other side can't get to the essence of what we're talking about, then what are we even talking about?  
+\end{quote}
+
+
+The key insight is that language doesn’t rest on one universal structure but on a family of practices tied together by family resemblances rather than strict definitions. Words gain their meaning from context and from the shared form of life of their users. So “understanding” a word means being able to participate competently in its game, not mapping it to some Platonic ideal.
+
+So here are the subjective applications of those lessons for our purposes.
+
+\begin{itemize}
+    \item Abstractions don’t come from essences, but from use. Wittgenstein critiques the Augustinian picture of language where words are “names” for essences. Instead, meaning arises in practice—through the rules of a community and the uses of words in context.
+    
+    Don’t design abstractions as if they have a hidden, universal “essence.” Instead, design them from use cases, interactions, and community expectations. For example, in a distributed runtime, the “Job” abstraction doesn’t exist because there is some metaphysical “Job-ness.” It emerges because developers and schedulers use certain patterns of task grouping, logging, and resource negotiation. Abstractions should be descriptive, not prescriptive. They codify the patterns developers already rely on, rather than impose alien conceptual frames.
+
+    \item Grammar = Rules of Play. Wittgenstein stresses that words require a grammar: implicit, community-generated rules of use. Different language games (geometry vs. daily speech) operate under different grammars, and confusion arises when one grammar is applied to another.
+    
+    Each subsystem has its own grammar (rules and invariants). The scheduler has different rules than the compiler IR; the storage system has different rules than the networking stack. Architect should perform the decomposition by respecting each subsystem’s grammar. Don’t force the rules of one subsystem onto another (e.g., imposing strict consistency models from databases onto real-time streaming). Misaligned decomposition often comes from mixing grammars—like treating “logging” as if it were synchronous state mutation, when its grammar is actually “asynchronous observation.”
+
+    \item Family resemblances, not single definitions Wittgenstein’s “game” example shows that many concepts can’t be defined by one essence but by a network of overlapping similarities.
+    
+    When you define an abstraction like “Service” or “Orchestrator,” don’t hunt for a single property that unites all instances. Instead, look for family resemblances: some services are stateful, some stateless; some are user-facing, some are infrastructure; but they share enough overlapping traits that the abstraction is useful. This means decomposition strategies should tolerate blurred edges: a component may play multiple roles depending on context (a worker might sometimes act as a cache).
+
+    \item Ordinary vs. Formal Language Games = Domain vs. Infrastructure Design. Wittgenstein contrasts the rigid rules of Euclidean geometry with the fuzzy edges of everyday speech. Both are valid, but confusion arises when you import one grammar into the other. 
+    
+    In infrastructure layers (compilers, type systems, schedulers), you can enforce rigid, formal grammars. In domain layers (business logic, data modeling, user interaction), fuzzier, evolving categories are natural and should be supported. Good architecture layers the formal beneath the informal: rigid grammars provide stability, while higher-level fuzzy abstractions remain flexible and contextual.
+
+    \item System architect as cartographer, not legislator. Wittgenstein redefines philosophy as “therapy”: clarifying practices, describing language games, and laying out family resemblances. Not inventing hidden essences.
+    
+    This means that the architect’s role is not to decree perfect abstractions from on high but to map practices, reveal grammars, and provide clear interfaces. A good decomposition is more like a language atlas than a taxonomy: it shows how modules are used, how they interrelate, and where rules differ.
+    
+    This reduces “talking past each other” in large engineering teams, where disagreements often stem not from code but from mismatched grammars of understanding.
+
+\end{itemize}
+
+For a software architect, this shifts how we think about abstractions: they aren’t “true” in the sense of eternal definitions, but useful conventions within a context of practice. Much like language games, software modules make sense in terms of the interactions, constraints, and behaviors in which they are embedded.
+
+Contextual meaning: An abstraction’s meaning depends on how it’s used in the larger system, not just its formal definition.
+
+Family resemblance: Different modules (e.g., logging frameworks, schedulers, memory managers) may share enough similarities to be treated as part of the same “game” even without identical properties.
+
+Pragmatic rules: What matters is that participants (developers, users, other subsystems) know the “rules of play”—the interfaces and conventions—not that the abstraction conforms to a universal taxonomy.
+
+---- Almost proved that volatility-based decomposition is the right one :) 
+
+
+\subsubsection{Congnitive categorization}
+
+Now let's raise the abstraction level even higher for our decomposition strategies and talk about more generic sets of meanings --- categories. 
+
+In George Lakoff’s\ref{} framework, a category is a way the human mind groups experiences, objects, or concepts together so they can be understood, reasoned about, and acted upon as a unit. Unlike the classical (Aristotelian) definition -- where categories are sets defined by necessary and sufficient conditions, Lakoff’s theory in "Women, Fire, and Dangerous Things"\ref{} challenges the classical view that categories are defined by clear-cut rules and necessary features. Instead, he argues that human categorization is often prototype-based: categories are organized around central, typical examples (a robin is a more typical “bird” than a penguin). Categories are also graded and fuzzy, allowing for partial membership and overlaps rather than rigid boundaries. He shows that “radial categories” emerge, where a central concept expands into related subtypes through metaphorical or functional links. This perspective highlights how human cognition is not strictly logical or taxonomic but shaped by embodied experience and cultural frames.
+
+Lakoff also emphasizes the role of conceptual metaphors—structures we use to understand abstract domains in terms of more concrete, embodied ones (e.g., “time is money” or “argument is war”). These metaphors shape not only how we think but also how categories are formed and extended. His broader claim is that human cognition is embodied and context-dependent: categories reflect our bodily experiences, social practices, and histories. Thus, categories are dynamic, evolving, and contextually sensitive, not static or universal. This view reshapes fields from linguistics to philosophy, showing that meaning and thought are grounded in lived experience rather than abstract logical definitions.
+
+As a system architect, you can treat those insights as directly relevant to system decomposition, how you break a system into parts, and abstraction creation how you name, layer, and reason about those parts.
+
+Though, due to length limitations we can't present full theory here and leave that to the readers, here are are some lessons a software architect can take from Lakoff's observations.
+
+\begin{itemize}
+    \item Categories and abstractions are not just hierarchies. Human categories aren’t crisp Aristotelian sets; they’re often fuzzy, graded, and prototype-based (“a robin is more of a bird than a penguin”). Which means that you shouldn’t expect your decomposition to always fall into neat hierarchies. Real systems have modules that overlap, hybrid responsibilities, and 'fuzzy boundaries'. Example: A GPU compiler pipeline might treat 'memory management' as part of both the runtime and the optimizer. Forcing a rigid tree often creates distortions. Instead, acknowledge graded membership and design for cross-cutting concerns explicitly (logging, resilience, security).
+
+    \item Prototypes and exemplars matter. Categories often center around prototypes (typical examples) rather than strict rules. As an architect, when creating abstractions, emphasize a prototypical use case rather than an abstract generalization. Example: Instead of designing a generic “DataBuffer” upfront, start with the prototype “Tensor on GPU memory.” That prototype anchors the abstraction, and later variants (tensor on shared memory, tensor on disk) can radiate from it.
+
+    \item Radial categories and core + extensions. Abstractions as categories can be radial, with a central core and multiple extensions that are linked metaphorically or functionally. Good abstractions often have a core API with radial extensions. Example: In a distributed runtime, the “Process” abstraction may radiate into “WorkerProcess,” “ServiceProcess,” and “OrchestratorProcess.” They’re not arbitrary; they extend the same conceptual center. This helps avoid monolithic design while still grounding variants in a stable conceptual nucleus.
+
+    \item Metaphors shape architecture. As humans we we think metaphorically (“time is money,”, “software is a machine”). These metaphors structure reasoning. It's crucial to be conscious of the metaphors guiding your decomposition. If you think of “pipeline” as water flow, you’ll emphasize linearity and bottlenecks. If you think of it as “graph,” you’ll emphasize parallelism and flexible composition. Choosing metaphors deliberately can unlock different decomposition strategies.
+
+    \item Family resemblance vs. rigid taxonomy. Some categories are held together not by one defining property but by a family resemblance. This can mean that in a system, modules don’t always share one trait. Sometimes they’re grouped because of overlapping features or patterns of use. Example: In kernel DSLs, CUDA, Triton, and Mojo may all be grouped as “GPU-centric kernel languages,” even though their type systems and lowering differ. The resemblance, not strict identity, justifies grouping.
+
+    \item Embodied cognition and experience “fit”. Lakoff’s point here is that our categories are grounded in human embodiment and experience. So, abstractions should be cognitively ergonomic. The “shape” of the abstraction should feel natural to the developers and users. Example: In PyTorch, “Tensor” feels intuitive because it matches(as an n-d array) both the mathematical prototype and the programming metaphor. If an abstraction forces users to think in alien terms, it will resist adoption.
+
+    \item  Category membership shifts depending on context. System decomposition should embrace contextual polymorphism. Example: The same “Tensor” object might be considered part of the data model in one layer, and part of the communication protocol in another. Abstractions should allow re-framing depending on architectural view (logical vs. deployment).
+
+    \item Categories evolve with use, culture, and history, so don’t over-fix decomposition at design time. Allow abstractions to evolve as the system matures and as new “prototypes” emerge. Example: a system might start with CPU/GPU as device categories, then later extend to TPU/NPU/RISC-V without redesigning the entire abstraction.
+\end{itemize}
+
+\textbf{Need some finale here}
+
+
+\subsection{Conclusion: Choosing the Right Decomposition Strategy}
+The key to successful system decomposition lies in choosing the right approach for the specific context. While functional decomposition and domain decomposition are natural starting points, they can lead to issues with complexity, redundancy, and over-decomposition. Object-oriented decomposition provides more flexibility, but it can be challenging to apply in certain domains.
+
+\begin{center}
+\begin{tabular}{|l|p{3.5cm}|p{3.5cm}|p{4cm}|}
+\hline
+\textbf{Strategy} & \textbf{Pros} & \textbf{Cons} & \textbf{Best Use Case} \\
+\hline
+Functional & Mirrors requirements & Poor change management, duplication & Requirement discovery \\
+\hline
+Domain-Driven & Business-aligned language & Redundant logic & Business process modeling \\
+\hline
+Object-Oriented & Encapsulation, abstraction & Deep hierarchies, poor fit for some domains & Low-level component modeling \\
+\hline
+Volatility-Based & Localizes change, scalable design & Requires expertise & Long-term, evolving systems \\
+\hline
+\end{tabular}
+\end{center}
+
+Volatility-based decomposition offers a promising alternative, as it focuses on isolating areas of change and minimizing their impact on the rest of the system. By carefully considering the volatility of different components and structuring the system around these volatile areas, we can create a more maintainable and adaptable design.
+
+Ultimately, the goal of system decomposition is not to apply a single technique uniformly across the entire system, but to find a balance between different decomposition strategies that best align with the system's requirements and constraints.

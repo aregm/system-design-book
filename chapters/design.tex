@@ -1,0 +1,130 @@
+\section{From Requirements to Conceptual Design}\label{design}
+
+\subsection{Introduction to System Design}
+System design is an essential phase in software engineering, bridging the gap between clearly defined requirements and their eventual realization as software. Unlike straightforward processes, transitioning from requirements to design is iterative and nuanced. The boundary between requirements specification and design is fluid, with continuous interaction leading to refinement in both directions. The initial stages of system design are characterized by high ambiguity, demanding careful exploration to achieve clarity and precision.
+
+The core phases of system design encompass stakeholder analysis, requirement definitions, and initial design exploration. Stakeholder analysis answers the critical question of "why" a project is undertaken, defining the value proposition clearly. Requirements definition identifies "what" must be achieved, while design focuses on "how" these requirements might be fulfilled.
+
+In this chapter, we transition from the requirements gathering phase, which was covered in the first chapter, into the conceptual design phase of system architecture. This chapter explores how abstract design ideas and systems are formulated before diving into detailed software design. We also explore the critical steps involved in system design and architecture, from conceptualization to realization, and the process of transforming requirements into a robust and coherent architecture.
+
+In this chapter, we delve into the essential concepts behind the process of system design. The focus is on the early stages of design, specifically on defining the requirements, identifying key concepts, and breaking down the system into manageable components. This chapter introduces the language of design and system architecture, which serves as the foundation for all subsequent design decisions.
+
+\subsection{From Requirements to Design}
+The journey from requirements to design is neither a strictly linear nor a well-defined process. It is an iterative process, where requirements evolve alongside the design itself. As design concepts take shape, new insights or needs may emerge that could alter the initial set of requirements. This iterative nature means that the line between requirements definition and design is often blurred, and modifications may need to be made at various stages of the process.
+
+Every system, regardless of scale—whether a small tool or a large, complex system—requires an understanding of the fundamental questions:
+\begin{itemize}
+    \item \textbf{Why are we building this system?} What value does it deliver, and to whom? This phase involves stakeholder analysis, determining who will benefit from the system and how.
+    \item \textbf{What will the system do?} What are the functional requirements, and how will the system address them? This is the core focus of requirements definition.
+    \item \textbf{How could we do it?} This concerns the starting design and possible approaches to achieving the project’s goals.
+\end{itemize}
+
+The clarity gained during this stage forms the basis for effective system design. It is also important to note that as we define requirements, they influence and shape the design, and conversely, the evolving design can influence or redefine the requirements themselves.
+
+In many cases, there are multiple ways to achieve the desired results, which necessitates thoughtful exploration of the design options.
+
+\subsection{Phases in Systems Engineering}
+In the context of system design, there are clear phases that the design process follows:
+\begin{itemize}
+    \item \textbf{Early Phase:} The ambiguity is high, and the goal is to reduce it. The focus is on gathering requirements.
+    \item \textbf{Concept Phase:} The primary goal is to generate ideas, foster creativity, and develop abstract concepts for the system.
+    \item \textbf{Design Phase:} As complexity increases, focus shifts to managing complexity through design, refining concepts into concrete systems.
+\end{itemize}
+
+This process gradually evolves from an abstract idea to a well-defined system. As complexity increases, it is important to maintain clarity and ensure that every step of the design process is aligned with the system’s objectives.
+
+System architecture is the embodiment of a concept. It involves allocating physical or informational functions to elements of form, and defining the structural interfaces among the objects. The architecture serves as a blueprint, defining how different components of the system interact and how the system will operate as a whole.
+
+The architecture is composed of the following:
+\begin{itemize}
+    \item \textbf{Function} – what the system does.
+    \item \textbf{Form} – how the system is structured and how it physically or logically appears.
+    \item \textbf{Concept} – the abstraction that links function and form together.
+\end{itemize}
+
+This concept-driven approach ensures that the architecture is not only functional but also adaptable, as it aligns the system’s structure with its goals.
+
+\subsection{Conceptual Design}
+Once the requirements are understood, the next step is to transition into conceptual design. Conceptual design is an abstract process, where we begin to structure ideas and map out the basic elements of the system. At this stage, we do not have all the answers; rather, we are exploring the high-level structure of the system without delving into detailed technical specifics.
+
+Originally derived from civil architecture, the concept provides a high-level abstraction or vision that guides the design process. This abstraction can be expressed informally as a mental image or formally as a detailed specification, dictating both the functionality and form of the designed system.
+
+The conceptual design process involves clearly identifying the operand—the entity or subject upon which the system acts—and the attributes of this operand that deliver value. A clear example is a refrigerator, designed to slow the spoilage rate of food (operand) by maintaining a chilled environment (functional transformation). Multiple concepts, like chilling, drying, or irradiating food, can be explored to achieve the required functionality, ultimately selecting the most practical and efficient one.
+
+In conceptual design, a \textit{concept} is central. A concept is a fundamental idea or notion that serves as the anchor for the system or part of the system being designed. It acts as a bridge between functionality and form, mapping abstract ideas to potential solutions. For example, in software, the concept could be a module or subsystem that will deliver specific functionality.
+
+Concepts in design are succinctly expressed through short descriptive phrases or simple visual icons, encapsulating the core functional mapping. Established concepts can often be referred to by common names directly associated with their form. Once a concept is clearly defined, the essential nature and list of parts become evident, simplifying the transition from abstract ideas to concrete implementations.
+
+The key steps in conceptual design include:
+\begin{itemize}
+    \item Identifying the core functions the system needs to perform.
+    \item Mapping these functions to abstract forms or structures that will help realize them.
+    \item Defining the relationships between these abstract elements and ensuring that they work together cohesively.
+\end{itemize}
+
+For instance, in the case of designing a refrigerator, the conceptual design could revolve around the idea of \textit{keeping food fresh}. The function could be \textit{slowing down spoilage}, and the form could be an insulated box that uses chilled air to achieve this.
+
+\subsection{Understanding Concepts and Their Mapping}
+The concept of a system or subsystem is more than just a set of features; it is a mental model that helps us understand how these features will work together. In software, conceptual design often involves representing a system with high-level abstractions, such as modules, components, or service architectures.
+
+A useful analogy for understanding this process is civil architecture. When designing a building, architects first conceptualize the idea of a space—such as a house or an office. They then map this concept to a form (e.g., a physical structure) that meets functional needs such as comfort, space utilization, and safety. Similarly, in software architecture, we begin with a conceptual model and progressively refine it into concrete, implementable components.
+
+In the case of Git, for example, the concept revolves around the idea of \textit{version control}. The function is to track changes to files over time, and the form is the data structure that represents this version history, such as commits and blobs (binary large objects).
+
+Once the concept is defined, it is transformed into an architecture through a series of steps:
+\begin{itemize}
+    \item \textbf{Establishing a solution vocabulary} – defining the language and terms that will guide the system’s development.
+    \item \textbf{Mapping the concept to physical/informational form} – this is where abstract ideas are turned into tangible components.
+    \item \textbf{Decomposing the system} – breaking down complex systems into smaller, manageable subsystems.
+\end{itemize}
+
+These steps lead to the creation of the system’s architecture, which can then be refined through functional decomposition to achieve the desired performance.
+
+\subsection{The Role of Functional Decomposition}
+Functional decomposition plays a key role in breaking down complex systems into manageable parts. In system design, especially at the conceptual level, functional decomposition helps identify core processes and map them to physical or abstract forms. However, it is important to avoid over-decomposition or overly granular functional breakdowns, as this can lead to unnecessary complexity and obscure the true goals of the system.
+
+At this stage, it is crucial to balance the need for functional decomposition with the need for abstraction. The goal is to achieve a clear, logical organization of functions while preserving the integrity and simplicity of the system.
+
+\subsection{The Importance of Mapping Functions to Forms}
+The core of conceptual design lies in the mapping of functions to forms. A \textit{function} represents what the system needs to do, while the \textit{form} refers to how the function will be realized. This mapping process defines the system's architecture and drives the design forward.
+
+For example, in the case of a refrigerator, the function is to slow down spoilage, and the form is an insulated box using chilled air to preserve the food. This form could take many shapes, such as a small cooler or a large industrial refrigerator, depending on the requirements.
+
+\begin{itemize}
+    \item Operand: Food (the thing being transformed)
+    \item Attribute to change: Spoilage rate
+    \item Function: Slow spoilage
+    \item Concept: A box that maintains a cold environment (a refrigerator)
+    \item Form: Physical device using insulation and a cooling unit
+\end{itemize}
+
+Through this mapping, we transform abstract goals (keep food fresh) into tangible design elements (cooling unit, insulated box).
+
+Let’s analyze Git, the distributed version control system, using our conceptual framework:
+\begin{itemize}
+    \item Operand: Files and directories
+    \item Attribute: Content over time (version)
+    \item Function: Track and retrieve historical versions
+    \item Concept: A content-addressable, versioned file system
+    \item Form: Commits, blobs, and trees connected via hashes
+\end{itemize}
+
+Git implements its core concept through a small set of abstractions (blobs, trees, commits), making it both elegant and powerful. The central idea is the dated file system—a snapshot of files and their states over time.
+
+
+Mapping functions to forms is a creative process that requires understanding the problem space and the constraints within which the system must operate. In software, this often involves creating modular systems that can be easily extended and modified to meet future requirements.
+
+\subsection{Designing for Flexibility: Refined Concepts and Variables}
+Once a concept is established, it is refined through the design process. Concepts evolve as new requirements, constraints, or limitations emerge. A critical part of this refinement is the introduction of design parameters, which can include performance requirements, resource utilization, and cost.
+
+In the context of software, these parameters might include memory usage, processing time, scalability, and user experience. Designers must constantly iterate and refine their concepts to ensure they align with the project's overall goals, adjusting the form and function as necessary.
+
+\subsection{The Role of Iteration in Conceptual Design}
+Conceptual design is an iterative process. As new ideas are tested and refined, the design evolves. In many cases, initial design choices will be revisited, adjusted, or discarded as more is learned about the problem domain.
+
+Iterating over concepts helps avoid premature optimization or rigid thinking. In software design, it is essential to embrace flexibility and remain open to changes in requirements, especially when the design is not yet fully realized.
+
+\subsection{Conclusion: The Art of Conceptual Design}
+Conceptual design is a critical phase in system architecture that sets the foundation for everything that follows. By defining clear concepts and mapping functions to forms, system architects can create flexible, scalable systems that meet both functional and non-functional requirements.
+
+In this chapter, we explored how to approach system design at a high level, breaking down the process of transforming abstract ideas into tangible systems. By understanding the importance of concepts, functional decomposition, and the iterative nature of design, software engineers and architects can craft solutions that are both effective and adaptable to future needs.

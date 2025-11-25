@@ -1,0 +1,75 @@
+\section{Introduction to the Systems}
+System design takes a central role as software development matures and productivity accelerates. Unlike many traditional engineering disciplines, where natural constraints like physical laws and material properties sharply limit design choices, software doesn't have a strict definition. It exists in a virtually boundless design space. With minimal hard constraints beyond compute, bandwidth, and memory, we are free to create nearly anything. But with that freedom comes a daunting cost: complexity.
+
+Complexity in software is self-propagating. Every poorly framed abstraction, leaky interface, or ambiguous responsibility adds friction to reasoning, extending development time and increasing the likelihood of bugs. Over time, we observe a familiar pattern across the industry: systems become harder to understand, modify, scale and reason about. Software quality degrades not because we lack effort or tools, but because we lose control over complexity.
+
+The most powerful tool we have to fight complexity is high-quality design. But teaching and learning how to design large, complex software systems remains one of the most underdeveloped areas in our field. While over the past several decades we have invented robust tools, methodologies, and frameworks starting from optimizing compilers, "agile" processes, software patterns, layered architectures, etc, the underlying skill of design itself often remains elusive, intuitive, or reserved for the most experienced. There are very few texts that address these issues, and even fewer that teach that. 
+
+This book aims to change that.
+
+We take a focused stance: a several-decades combined experience taught us that decomposition and composition are the most challenging parts and the essence of software design. These two interlocking forces -- how we break systems down, and how we build them back up -- form the core of every design decision. Our goal is to help you understand these forces deeply, master the techniques that govern them, and develop the judgment required to wield them well.
+
+Rather than offer a collection of patterns or interview tricks, this book builds a language and a way of thinking. It teaches software design not as a checklist, but as a practice, as any good philosophy book does.
+
+We organize the book around the following key topics:
+
+The Language of Design: The terms, mental models, and conceptual frameworks that allow us to think clearly about system architecture and structure.
+
+System Decomposition: How to break a complex system into components that are cohesive, loosely coupled, and individually understandable.
+
+Abstraction: Techniques for hiding irrelevant details and shaping interfaces that enable comprehension, substitution, and scalability.
+
+Creation and Synthesis: How to construct systems from parts, ensuring that what is assembled is more than just the sum of its components.
+
+Building Systems: Practical strategies for constructing scalable, maintainable, and evolvable software that stands the test of time.
+
+We stand on the shoulders of giants: Fred Brooks' reflections on software complexity and conceptual integrity [Bro10], Richard Gabriel’s explorations of design and aesthetics [FG10], John Ousterhout’s emphasis on simplicity [Ous18], Eberhardt Rechtin’s systems thinking, and the applied guidance from Cervantes and Kazman [CK16] and Lowy [Low19]. These thinkers have shaped our understanding of what good design means and why it matters. 
+
+This book is for practitioners who are building real systems, not solving toy problems. It is for those who want to understand why systems fail as they grow, and what it takes to build ones that do not. If you're tired of interview-oriented design advice and want to master the foundational thinking behind large-scale software systems, you're in the right place.
+
+In the first chapter we will talk about The Language of Design.
+Before we can design systems well, we must learn to speak about them precisely. The practice of software design, like all disciplines, is grounded in language. Without a shared vocabulary, teams cannot reason about structure, discuss tradeoffs, or critique architectures. The words we choose affect what we see—and what we are blind to.
+
+Most software teams suffer not from a lack of intelligence or good intentions, but from a lack of shared concepts. We confuse implementation with architecture, code with system, modules with services, and so on. If we cannot distinguish between cohesion and coupling, between interface and boundary, or between layering and dependency, our designs degrade into vague shapes held together by assumptions and tribal knowledge.
+
+This chapter introduces a foundational vocabulary for design. Our aim is not to be pedantic, but to clarify and empower. Like any craft, software architecture benefits from precise terms that map to concrete experiences.
+
+We will explore the following core concepts: 
+\begin{itemize}
+    \item System and Subsystem,
+    \item Component, Module, and Service,
+    \item Interface and Boundary,
+    \item Layer, Dependency and hierarchy,
+    \item Invariants and Contracts.
+\end{itemize}
+
+This language is not just for architects. It should permeate the entire team --- from junior engineers to technical leads. Precision in terminology supports precision in thought and clarity in design.
+Every programmer is familiar with the Gang of Four books on Design Patterns and knows that it was  
+
+\begin{displayquote}
+“You cannot change what you cannot name.” --- Systems Thinking Principle
+\end{displayquote}
+
+System design takes a central role as productivity increases.
+Design space for software is colossal in comparison to other engineering disciplines due to limited restrictions (only bandwidth, capacity, compute).
+Complexity spawns complexity. We observe an overall software quality degradation.
+The most powerful tool to fight complexity we have is high-quality design.
+Yet, teaching how to design large, complex systems is non-trivial.
+Over the last several decades, the field has developed tools and methods for building better systems. Yet, the art of design remains elusive.
+In this book, we focus on the two (and only) main aspects of system design: decomposition and composition.
+
+The book covers the following key topics:
+\begin{itemize}
+    \item \textbf{Language of the Design:} The terminology and conceptual frameworks used in system design.
+    \item \textbf{System Decomposition:} Techniques for breaking down complex systems into manageable components.
+    \item \textbf{Abstraction:} Creating simplified models that hide unnecessary complexity.
+    \item \textbf{Creation and Synthesis:} The process of putting together the various elements of a system to create a cohesive whole.
+    \item \textbf{Building Systems:} Practical approaches to building scalable, maintainable software systems.
+\end{itemize}
+
+Ousterhout \cite{ousterhout}, Fairbanks \cite{fairbanks}, Brooks \cite{brooks}, Lowy \cite{lowy}, Cervantes and Kazman \cite{cervantes-kazman}.
+
+\subsection{System - In Large} 
+
+After the Internet boom and people started discussing topics in the BBS and forums, followed by the media nowadays, a technique or trick emerged. To some extent it goes back to Socratian method - give me a definition of the term and I will found a hole or not well defined part and destroy you. The same is true with the definition of the term "system". And here we will call Witgeinstein to our help and ask the central question about the language. What if they just don't understand and misuse the "language"?
+
